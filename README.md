@@ -8,7 +8,17 @@ Repositori awal hanya berisi README. Tidak ada Excel karyawan di workspace saat 
 
 ## Menjalankan MVP
 
-Di workspace ini server demo sudah dijalankan di `http://localhost:8000`. Untuk menyiapkan ulang dari repositori pada mesin dengan PHP 8.4+, Composer, Node 24+, dan SQLite:
+Cara termudah untuk melihat aplikasi **secara interaktif di localhost komputer Anda** hanya memerlukan Docker:
+
+```bash
+git clone -b codex/hrd-browser-mvp https://github.com/lrmcorp/hrghrd.git
+cd hrghrd
+./scripts/run-local.sh
+```
+
+Buka `http://localhost:8000/login`. Skrip ini memasang dependensi PHP/Node, membangun aset, membuat database SQLite dan akun demo pada pemakaian pertama, lalu menjalankan server sampai Anda menekan Ctrl+C. Jika port 8000 terpakai, jalankan `HRD_PORT=8001 ./scripts/run-local.sh` dan buka port tersebut. `localhost` dari lingkungan cloud Codex tidak sama dengan `localhost` komputer Anda.
+
+Untuk menyiapkan manual pada mesin dengan PHP 8.4+, Composer, Node 24+, dan SQLite:
 
 ```bash
 composer install --no-dev

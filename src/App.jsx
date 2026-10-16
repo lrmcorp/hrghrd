@@ -48,13 +48,13 @@ function BrandLogo({ name, domain, src, className = '' }) {
   const [imageAvailable, setImageAvailable] = useState(true);
 
   return (
-    <div className="flex h-[clamp(64px,12vw,160px)] w-full items-center justify-center">
+    <div className="flex h-[clamp(64px,12vw,160px)] w-[85%] items-center justify-center sm:w-[75%]">
       {imageAvailable && (src || domain) ? (
         <img
           src={src || `https://www.google.com/s2/favicons?domain=${domain}&sz=256`}
           alt={`${name} logo`}
           loading="eager"
-          className={`max-h-full w-[85%] object-contain sm:w-[75%] ${className}`}
+          className={`h-auto w-auto max-h-full max-w-full shrink-0 object-contain ${className}`}
           onError={() => setImageAvailable(false)}
         />
       ) : (

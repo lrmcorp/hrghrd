@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, CircleDot, Dumbbell, Menu, Mountain, Smile, Waves, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, CircleDot, Dumbbell, Menu, Mountain, Smile, Waves, X } from 'lucide-react';
 
 const videoUrl = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_204221_5339e40b-e73d-4ab0-9c65-79c18c66fd50.mp4';
 
@@ -14,18 +14,21 @@ const movementBrands = [
   {
     name: 'Daily Dose Pilates',
     description: 'A little movement, every day.',
+    href: 'https://dailydosepilates.com/',
     Icon: Waves,
     color: 'bg-[#e6e5d9]',
   },
   {
     name: 'Limitless Fitness',
     description: 'Strength starts where you are.',
+    href: 'https://limitlessfitness.id/',
     Icon: Dumbbell,
     color: 'bg-[#dce5d9]',
   },
   {
     name: 'Sunrise Padel',
     description: 'Make room for play.',
+    href: 'https://sunrisepadel.id/',
     Icon: CircleDot,
     color: 'bg-[#ede1d1]',
   },
@@ -163,8 +166,14 @@ export default function App() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6 lg:gap-5">
-              {movementBrands.map(({ name, description, Icon, color }, index) => (
-                <article key={name} className={`group relative flex min-h-[275px] flex-col justify-between overflow-hidden rounded-[26px] p-7 sm:min-h-[300px] sm:p-8 ${color} ${index < 3 ? 'lg:col-span-2' : 'lg:col-span-3'}`}>
+              {movementBrands.map(({ name, description, href, Icon, color }, index) => {
+                const Card = href ? 'a' : 'article';
+                return (
+                <Card
+                  key={name}
+                  {...(href ? { href, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Visit ${name} website (opens in a new tab)` } : {})}
+                  className={`group relative flex min-h-[275px] flex-col justify-between overflow-hidden rounded-[26px] p-7 sm:min-h-[300px] sm:p-8 ${color} ${index < 3 ? 'lg:col-span-2' : 'lg:col-span-3'} ${href ? 'cursor-pointer transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#172018]' : ''}`}
+                >
                   <div className="flex items-start justify-between">
                     <span className="text-xs font-semibold tracking-[0.18em] text-[#546055]">0{index + 1}</span>
                     <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#172018]/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
@@ -174,10 +183,12 @@ export default function App() {
                   <div className="relative z-10">
                     <h3 className="max-w-sm text-3xl font-medium leading-tight tracking-tight sm:text-4xl">{name}</h3>
                     <p className="mt-3 text-sm text-[#4f5d50] sm:text-base">{description}</p>
+                    {href && <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em]">Visit website <ArrowUpRight size={16} aria-hidden="true" /></span>}
                   </div>
                   <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -right-20 h-64 w-64 rounded-full border-[32px] border-white/25 transition-transform duration-700 group-hover:scale-125" />
-                </article>
-              ))}
+                </Card>
+                );
+              })}
             </div>
           </div>
         </section>

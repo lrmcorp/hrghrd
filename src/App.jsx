@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
 
 const videoUrl = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_204221_5339e40b-e73d-4ab0-9c65-79c18c66fd50.mp4';
+const publicEmail = 'office@hrgroup.id';
+const formRecipient = 'office@lrmcorporation.com';
 
 const links = [
   { label: 'Home', href: '#home' },
@@ -158,9 +160,12 @@ function HomePage() {
           <p className="mb-5 max-w-sm animate-[fadeSlideUp_0.8s_ease_0.7s_both] text-sm leading-relaxed text-white/70 sm:mb-6 sm:max-w-lg sm:text-base md:text-lg">
             Healthy movement for every body, every age.
           </p>
-          <a href="#movement" className="inline-flex animate-[fadeSlideUp_0.8s_ease_0.9s_both] items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-medium text-black transition-transform hover:scale-105 sm:px-6 sm:py-3">
-            Move With Us <ArrowRight size={16} aria-hidden="true" />
-          </a>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <a href="#movement" className="inline-flex animate-[fadeSlideUp_0.8s_ease_0.9s_both] items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-medium text-black transition-transform hover:scale-105 sm:px-6 sm:py-3">
+              Move With Us <ArrowRight size={16} aria-hidden="true" />
+            </a>
+            <a href={`mailto:${publicEmail}`} className="animate-[fadeSlideUp_0.8s_ease_1.1s_both] text-xs text-white/80 underline decoration-white/40 underline-offset-4 transition-colors hover:text-white hover:decoration-white sm:text-sm">{publicEmail}</a>
+          </div>
         </div>
       </div>
       </section>
@@ -226,14 +231,14 @@ function ContactPage() {
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#617060]">Reach Us</p>
             <h1 className="max-w-xl text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Let’s move<br />together.</h1>
             <p className="mt-6 max-w-md text-base leading-relaxed text-[#59665a]">Have a question or an idea? Send us a note and our team will get back to you.</p>
-            <a href="mailto:office@lrmcorporation.com" className="mt-8 inline-block text-sm font-medium text-[#172018] underline decoration-[#172018]/40 underline-offset-4 hover:decoration-[#172018]">office@lrmcorporation.com</a>
+            <a href={`mailto:${publicEmail}`} className="mt-8 inline-block text-sm font-medium text-[#172018] underline decoration-[#172018]/40 underline-offset-4 hover:decoration-[#172018]">{publicEmail}</a>
           </div>
 
           <div>
             {messageSent && (
               <p role="status" className="mb-6 rounded-xl border border-[#90a38e] bg-white/70 px-5 py-4 text-sm text-[#172018]">Thank you. Your message has been sent.</p>
             )}
-            <form action="https://formsubmit.co/office@lrmcorporation.com" method="POST" className="space-y-5">
+            <form action={`https://formsubmit.co/${formRecipient}`} method="POST" className="space-y-5">
               <input type="hidden" name="_subject" value="New message from HR Group website" />
               <input type="hidden" name="_next" value="https://hr-group-wellness.almond-flint-4094.chatgpt.site/contact/?sent=1" />
               <input type="text" name="_honey" tabIndex="-1" autoComplete="off" className="absolute -left-[10000px]" aria-hidden="true" />

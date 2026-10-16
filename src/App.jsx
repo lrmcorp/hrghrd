@@ -38,23 +38,26 @@ const movementBrands = [
   },
   {
     name: 'Little Rollers for Kids',
-    color: 'bg-[#ebe0df]',
+    logoSrc: '/images/little-rollers.png',
+    color: 'bg-[#efe8dc]',
   },
 ];
 
-function BrandLogo({ name, domain }) {
+function BrandLogo({ name, domain, src }) {
   const [imageAvailable, setImageAvailable] = useState(true);
 
-  return imageAvailable && domain ? (
+  return imageAvailable && (src || domain) ? (
     <>
+      <div className="flex h-[48%] w-[64%] items-center justify-center">
       <img
-        src={`https://www.google.com/s2/favicons?domain=${domain}&sz=256`}
+        src={src || `https://www.google.com/s2/favicons?domain=${domain}&sz=256`}
         alt={`${name} logo`}
         loading="eager"
-        className="h-[38%] w-[38%] object-contain sm:h-[42%] sm:w-[42%]"
+        className="h-full w-full object-contain"
         onError={() => setImageAvailable(false)}
       />
-      <h3 className="mt-1 max-w-full text-[clamp(9px,1.5vw,16px)] font-medium leading-tight tracking-tight sm:mt-2">{name}</h3>
+      </div>
+      <h3 className="mt-1 flex h-[24%] max-w-full items-center justify-center text-[clamp(9px,1.5vw,16px)] font-medium leading-tight tracking-tight sm:mt-2">{name}</h3>
     </>
   ) : (
     <h3 className="px-1 text-center text-[clamp(10px,1.8vw,20px)] font-semibold leading-tight tracking-tight">{name}</h3>
@@ -171,9 +174,9 @@ function HomePage() {
       </section>
 
       <main>
-        <section id="movement" aria-labelledby="movement-heading" className="flex h-[100svh] min-h-[360px] flex-col px-4 py-6 sm:px-6 sm:py-8 md:px-12 lg:px-16">
-          <div className="mx-auto flex h-full w-full max-w-[1440px] flex-col">
-            <div className="mb-4 flex shrink-0 items-end justify-between gap-6 border-b border-[#172018]/20 pb-4 md:mb-6 md:pb-6">
+        <section id="movement" aria-labelledby="movement-heading" className="px-4 py-10 sm:px-6 sm:py-12 md:px-12 md:py-16 lg:px-16">
+          <div className="mx-auto w-full max-w-[1440px]">
+            <div className="mb-6 flex items-end justify-between gap-6 border-b border-[#172018]/20 pb-4 sm:mb-8 md:pb-6">
               <div>
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#687368] md:mb-3 md:text-xs">01 / The Movement</p>
                 <h2 id="movement-heading" className="text-3xl font-medium leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">Find your way to move.</h2>
@@ -181,9 +184,9 @@ function HomePage() {
               <p className="hidden max-w-xs text-sm leading-relaxed text-[#5f695f] md:block lg:text-base">Five ways to find your flow.</p>
             </div>
 
-            <div className="flex min-h-0 flex-1 items-center">
+            <div>
               <div className="grid w-full grid-cols-5 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
-              {movementBrands.map(({ name, href, logoDomain, color }) => {
+              {movementBrands.map(({ name, href, logoDomain, logoSrc, color }) => {
                 const Card = href ? 'a' : 'article';
                 return (
                 <Card
@@ -191,7 +194,7 @@ function HomePage() {
                   {...(href ? { href, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Visit ${name} website (opens in a new tab)` } : {})}
                   className={`group relative flex aspect-square min-w-0 flex-col items-center justify-center overflow-hidden rounded-xl p-1 text-center sm:rounded-2xl sm:p-3 md:rounded-[26px] ${color} ${href ? 'cursor-pointer transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#172018]' : ''}`}
                 >
-                  <BrandLogo name={name} domain={logoDomain} />
+                  <BrandLogo name={name} domain={logoDomain} src={logoSrc} />
                   {href && <ArrowUpRight size={14} aria-hidden="true" className="absolute right-2 top-2 hidden opacity-60 sm:block" />}
                 </Card>
                 );

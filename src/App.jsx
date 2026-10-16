@@ -146,11 +146,11 @@ export default function App() {
       </div>
 
       <div className="relative z-10 flex h-[calc(100vh-80px)] flex-col justify-between px-6 pb-10 pt-12 sm:pb-12 sm:pt-16 md:px-12 md:pb-16 md:pt-20 lg:px-16">
-        <div className="max-w-3xl">
+        <div className="flex max-w-3xl flex-1 flex-col justify-center md:block md:flex-none">
           <p className="mb-4 animate-[fadeSlideUp_0.8s_ease_0.2s_both] text-xs text-white/90 sm:mb-6 sm:text-sm">
             Wellness for every age
           </p>
-          <h1 className="animate-[fadeSlideUp_0.8s_ease_0.4s_both] text-3xl font-medium leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="animate-[fadeSlideUp_0.8s_ease_0.4s_both] text-[clamp(3rem,14vw,4.75rem)] font-medium leading-[0.98] tracking-tight text-white md:text-6xl md:leading-[1.1] lg:text-7xl">
             Move well.<br />Live fully.<br />Together.
           </h1>
         </div>

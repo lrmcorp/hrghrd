@@ -7,7 +7,6 @@ const links = [
   { label: 'Home', href: '#home' },
   { label: 'Movement', href: '#movement' },
   { label: 'Our Story', href: '#story' },
-  { label: 'Reach Us', href: 'mailto:?subject=Hello%20HR%20Group' },
 ];
 
 const movementBrands = [
@@ -73,6 +72,7 @@ function Logo() {
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const messageSent = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('sent') === '1';
 
   useEffect(() => {
     const onKeyDown = (event) => {
@@ -109,8 +109,8 @@ export default function App() {
           </nav>
         </div>
 
-        <a href="mailto:?subject=Hello%20HR%20Group" className="hidden rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-transform hover:scale-105 md:inline-flex">
-          Let's Talk
+        <a href="#contact" className="hidden rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-transform hover:scale-105 md:inline-flex">
+          Reach Us
         </a>
 
         <button
@@ -139,8 +139,8 @@ export default function App() {
               </a>
             ))}
           </div>
-          <a href="mailto:?subject=Hello%20HR%20Group" tabIndex={mobileMenuOpen ? 0 : -1} onClick={() => setMobileMenuOpen(false)} className="mt-10 inline-flex w-fit rounded-full bg-white px-8 py-3.5 text-base font-medium text-black transition-transform hover:scale-105">
-            Let's Talk
+          <a href="#contact" tabIndex={mobileMenuOpen ? 0 : -1} onClick={() => setMobileMenuOpen(false)} className="mt-10 inline-flex w-fit rounded-full bg-white px-8 py-3.5 text-base font-medium text-black transition-transform hover:scale-105">
+            Reach Us
           </a>
         </nav>
       </div>
@@ -204,6 +204,43 @@ export default function App() {
               <h2 id="story-heading" className="text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">A story in motion.</h2>
             </div>
             <p className="text-base text-white/60 md:pb-1 md:text-lg">More of our story, coming soon.</p>
+          </div>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-heading" className="bg-[#e9ede4] px-6 py-20 sm:py-24 md:px-12 lg:px-16">
+          <div className="mx-auto grid max-w-[1440px] gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
+            <div>
+              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#617060]">03 / Reach Us</p>
+              <h2 id="contact-heading" className="max-w-xl text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Let’s move<br />together.</h2>
+              <p className="mt-6 max-w-md text-base leading-relaxed text-[#59665a]">Have a question or an idea? Send us a note and our team will get back to you.</p>
+              <a href="mailto:office@lrmcorporation.com" className="mt-8 inline-block text-sm font-medium text-[#172018] underline decoration-[#172018]/40 underline-offset-4 hover:decoration-[#172018]">office@lrmcorporation.com</a>
+            </div>
+
+            <div>
+              {messageSent && (
+                <p role="status" className="mb-6 rounded-xl border border-[#90a38e] bg-white/70 px-5 py-4 text-sm text-[#172018]">Thank you. Your message has been sent.</p>
+              )}
+              <form action="https://formsubmit.co/office@lrmcorporation.com" method="POST" className="space-y-5">
+                <input type="hidden" name="_subject" value="New message from HR Group website" />
+                <input type="hidden" name="_next" value="https://hr-group-wellness.almond-flint-4094.chatgpt.site/?sent=1#contact" />
+                <input type="text" name="_honey" tabIndex="-1" autoComplete="off" className="absolute -left-[10000px]" aria-hidden="true" />
+                <div>
+                  <label htmlFor="contact-name" className="mb-2 block text-sm font-medium">Your name</label>
+                  <input id="contact-name" name="name" type="text" autoComplete="name" required maxLength={120} className="w-full rounded-xl border border-[#b7c3b4] bg-white/70 px-4 py-3.5 text-base outline-none transition-colors placeholder:text-[#7a8679] focus:border-[#172018] focus:ring-2 focus:ring-[#172018]/15" placeholder="Your name" />
+                </div>
+                <div>
+                  <label htmlFor="contact-email" className="mb-2 block text-sm font-medium">Email address</label>
+                  <input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} className="w-full rounded-xl border border-[#b7c3b4] bg-white/70 px-4 py-3.5 text-base outline-none transition-colors placeholder:text-[#7a8679] focus:border-[#172018] focus:ring-2 focus:ring-[#172018]/15" placeholder="you@example.com" />
+                </div>
+                <div>
+                  <label htmlFor="contact-message" className="mb-2 block text-sm font-medium">Your message</label>
+                  <textarea id="contact-message" name="message" rows={5} required maxLength={5000} className="w-full resize-y rounded-xl border border-[#b7c3b4] bg-white/70 px-4 py-3.5 text-base outline-none transition-colors placeholder:text-[#7a8679] focus:border-[#172018] focus:ring-2 focus:ring-[#172018]/15" placeholder="Tell us what’s on your mind" />
+                </div>
+                <button type="submit" className="inline-flex items-center gap-2 rounded-lg bg-[#172018] px-6 py-3 text-sm font-medium text-white transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#172018]">
+                  Send Message <ArrowRight size={16} aria-hidden="true" />
+                </button>
+              </form>
+            </div>
           </div>
         </section>
       </main>

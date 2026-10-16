@@ -1,6 +1,6 @@
 # HR Group wellness landing page
 
-A React, Tailwind CSS, and Lucide React landing page for HR Group, featuring a video hero and five movement brands. The Daily Dose Pilates, Limitless Fitness, and Sunrise Padel cards link to their websites.
+A React, Tailwind CSS, and Lucide React landing page for HR Group, featuring a video hero and five movement brands. Four square logo tiles link to their websites; Little Rollers for Kids stays unlinked until its site is available.
 
 ```sh
 npm install

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, ArrowUpRight, CircleDot, Dumbbell, Menu, Mountain, Smile, Waves, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
 
 const videoUrl = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_204221_5339e40b-e73d-4ab0-9c65-79c18c66fd50.mp4';
 
@@ -13,38 +13,52 @@ const links = [
 const movementBrands = [
   {
     name: 'Daily Dose Pilates',
-    description: 'A little movement, every day.',
     href: 'https://dailydosepilates.com/',
-    Icon: Waves,
+    logoDomain: 'dailydosepilates.com',
     color: 'bg-[#e6e5d9]',
   },
   {
     name: 'Limitless Fitness',
-    description: 'Strength starts where you are.',
     href: 'https://limitlessfitness.id/',
-    Icon: Dumbbell,
+    logoDomain: 'limitlessfitness.id',
     color: 'bg-[#dce5d9]',
   },
   {
     name: 'Sunrise Padel',
-    description: 'Make room for play.',
     href: 'https://sunrisepadel.id/',
-    Icon: CircleDot,
+    logoDomain: 'sunrisepadel.id',
     color: 'bg-[#ede1d1]',
   },
   {
     name: 'The Cave',
-    description: 'Find your own momentum.',
-    Icon: Mountain,
+    href: 'https://thecave.id/',
+    logoDomain: 'thecave.id',
     color: 'bg-[#dce1df]',
   },
   {
     name: 'Little Rollers for Kids',
-    description: 'Big joy for little movers.',
-    Icon: Smile,
     color: 'bg-[#ebe0df]',
   },
 ];
+
+function BrandLogo({ name, domain }) {
+  const [imageAvailable, setImageAvailable] = useState(true);
+
+  return imageAvailable && domain ? (
+    <>
+      <img
+        src={`https://www.google.com/s2/favicons?domain=${domain}&sz=256`}
+        alt={`${name} logo`}
+        loading="eager"
+        className="h-[38%] w-[38%] object-contain sm:h-[42%] sm:w-[42%]"
+        onError={() => setImageAvailable(false)}
+      />
+      <h3 className="mt-1 max-w-full text-[clamp(9px,1.5vw,16px)] font-medium leading-tight tracking-tight sm:mt-2">{name}</h3>
+    </>
+  ) : (
+    <h3 className="px-1 text-center text-[clamp(10px,1.8vw,20px)] font-semibold leading-tight tracking-tight">{name}</h3>
+  );
+}
 
 function Logo() {
   return (
@@ -153,9 +167,9 @@ export default function App() {
       </section>
 
       <main>
-        <section id="movement" aria-labelledby="movement-heading" className="movement-viewport h-[100svh] px-4 py-5 sm:px-6 sm:py-7 md:px-12 md:py-9 lg:px-16 lg:py-10">
-          <div className="mx-auto flex h-full max-w-[1440px] flex-col">
-            <div className="movement-intro mb-3 flex shrink-0 items-end justify-between gap-6 border-b border-[#172018]/20 pb-3 md:mb-5 md:pb-5">
+        <section id="movement" aria-labelledby="movement-heading" className="flex h-[100svh] min-h-[360px] flex-col px-4 py-6 sm:px-6 sm:py-8 md:px-12 lg:px-16">
+          <div className="mx-auto flex h-full w-full max-w-[1440px] flex-col">
+            <div className="mb-4 flex shrink-0 items-end justify-between gap-6 border-b border-[#172018]/20 pb-4 md:mb-6 md:pb-6">
               <div>
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#687368] md:mb-3 md:text-xs">01 / The Movement</p>
                 <h2 id="movement-heading" className="text-3xl font-medium leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">Find your way to move.</h2>
@@ -163,31 +177,22 @@ export default function App() {
               <p className="hidden max-w-xs text-sm leading-relaxed text-[#5f695f] md:block lg:text-base">Five ways to find your flow.</p>
             </div>
 
-            <div className="movement-grid grid min-h-0 flex-1 grid-rows-5 gap-2 md:grid-cols-2 md:grid-rows-3 md:gap-3 lg:grid-cols-6 lg:grid-rows-2">
-              {movementBrands.map(({ name, description, href, Icon, color }, index) => {
+            <div className="flex min-h-0 flex-1 items-center">
+              <div className="grid w-full grid-cols-5 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
+              {movementBrands.map(({ name, href, logoDomain, color }) => {
                 const Card = href ? 'a' : 'article';
                 return (
                 <Card
                   key={name}
                   {...(href ? { href, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Visit ${name} website (opens in a new tab)` } : {})}
-                  className={`movement-card group relative flex min-h-0 flex-col justify-center overflow-hidden rounded-2xl p-3 pr-10 md:rounded-[26px] md:p-4 lg:justify-between lg:p-6 ${color} ${index < 3 ? 'lg:col-span-2' : 'lg:col-span-3'} ${href ? 'cursor-pointer transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#172018]' : ''}`}
+                  className={`group relative flex aspect-square min-w-0 flex-col items-center justify-center overflow-hidden rounded-xl p-1 text-center sm:rounded-2xl sm:p-3 md:rounded-[26px] ${color} ${href ? 'cursor-pointer transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#172018]' : ''}`}
                 >
-                  <div className="movement-card-top hidden items-start justify-between lg:flex">
-                    <span className="text-xs font-semibold tracking-[0.18em] text-[#546055]">0{index + 1}</span>
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[#172018]/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110 lg:h-11 lg:w-11">
-                      <Icon size={20} strokeWidth={1.5} aria-hidden="true" />
-                    </div>
-                  </div>
-                  <div className="relative z-10">
-                    <h3 className="max-w-sm text-base font-medium leading-tight tracking-tight sm:text-xl lg:text-3xl">{name}</h3>
-                    <p className="movement-card-description mt-0.5 text-xs leading-tight text-[#4f5d50] md:mt-2 md:text-sm">{description}</p>
-                    {href && <span className="movement-card-visit mt-4 hidden items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] lg:inline-flex">Visit website <ArrowUpRight size={14} aria-hidden="true" /></span>}
-                  </div>
-                  {href && <ArrowUpRight size={19} aria-hidden="true" className="absolute right-4 top-1/2 -translate-y-1/2 lg:hidden" />}
-                  <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -right-20 hidden h-64 w-64 rounded-full border-[32px] border-white/25 transition-transform duration-700 group-hover:scale-125 lg:block" />
+                  <BrandLogo name={name} domain={logoDomain} />
+                  {href && <ArrowUpRight size={14} aria-hidden="true" className="absolute right-2 top-2 hidden opacity-60 sm:block" />}
                 </Card>
                 );
               })}
+              </div>
             </div>
           </div>
         </section>

@@ -22,23 +22,6 @@ html { scroll-behavior: smooth; }
   }
 }
 
-@media (max-height: 540px) {
-  .movement-viewport { padding-top: 12px; padding-bottom: 12px; }
-  .movement-intro { margin-bottom: 8px; padding-bottom: 8px; }
-  .movement-card { justify-content: center; padding: 8px 36px 8px 12px; }
-  .movement-card-top, .movement-card-visit, .movement-card-description { display: none; }
-  .movement-card > svg { display: block; }
-}
-
-@media (max-height: 540px) and (orientation: landscape) {
-  .movement-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-  }
-  .movement-grid > :nth-child(-n+3) { grid-column: span 2 / span 2; }
-  .movement-grid > :nth-child(n+4) { grid-column: span 3 / span 3; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

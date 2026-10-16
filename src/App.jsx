@@ -153,39 +153,38 @@ export default function App() {
       </section>
 
       <main>
-        <section id="movement" aria-labelledby="movement-heading" className="px-6 py-20 sm:py-24 md:px-12 md:py-28 lg:px-16 lg:py-32">
-          <div className="mx-auto max-w-[1440px]">
-            <div className="mb-12 flex flex-col justify-between gap-7 border-b border-[#172018]/20 pb-10 md:mb-14 md:flex-row md:items-end">
+        <section id="movement" aria-labelledby="movement-heading" className="movement-viewport h-[100svh] px-4 py-5 sm:px-6 sm:py-7 md:px-12 md:py-9 lg:px-16 lg:py-10">
+          <div className="mx-auto flex h-full max-w-[1440px] flex-col">
+            <div className="movement-intro mb-3 flex shrink-0 items-end justify-between gap-6 border-b border-[#172018]/20 pb-3 md:mb-5 md:pb-5">
               <div>
-                <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#687368]">01 / The Movement</p>
-                <h2 id="movement-heading" className="max-w-2xl text-4xl font-medium leading-[1.04] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-                  Find your way<br />to move.
-                </h2>
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#687368] md:mb-3 md:text-xs">01 / The Movement</p>
+                <h2 id="movement-heading" className="text-3xl font-medium leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">Find your way to move.</h2>
               </div>
-              <p className="max-w-xs text-base leading-relaxed text-[#5f695f] md:pb-1 md:text-lg">Five ways to find your flow.</p>
+              <p className="hidden max-w-xs text-sm leading-relaxed text-[#5f695f] md:block lg:text-base">Five ways to find your flow.</p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6 lg:gap-5">
+            <div className="movement-grid grid min-h-0 flex-1 grid-rows-5 gap-2 md:grid-cols-2 md:grid-rows-3 md:gap-3 lg:grid-cols-6 lg:grid-rows-2">
               {movementBrands.map(({ name, description, href, Icon, color }, index) => {
                 const Card = href ? 'a' : 'article';
                 return (
                 <Card
                   key={name}
                   {...(href ? { href, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Visit ${name} website (opens in a new tab)` } : {})}
-                  className={`group relative flex min-h-[275px] flex-col justify-between overflow-hidden rounded-[26px] p-7 sm:min-h-[300px] sm:p-8 ${color} ${index < 3 ? 'lg:col-span-2' : 'lg:col-span-3'} ${href ? 'cursor-pointer transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#172018]' : ''}`}
+                  className={`movement-card group relative flex min-h-0 flex-col justify-center overflow-hidden rounded-2xl p-3 pr-10 md:rounded-[26px] md:p-4 lg:justify-between lg:p-6 ${color} ${index < 3 ? 'lg:col-span-2' : 'lg:col-span-3'} ${href ? 'cursor-pointer transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#172018]' : ''}`}
                 >
-                  <div className="flex items-start justify-between">
+                  <div className="movement-card-top hidden items-start justify-between lg:flex">
                     <span className="text-xs font-semibold tracking-[0.18em] text-[#546055]">0{index + 1}</span>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#172018]/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
-                      <Icon size={22} strokeWidth={1.5} aria-hidden="true" />
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[#172018]/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110 lg:h-11 lg:w-11">
+                      <Icon size={20} strokeWidth={1.5} aria-hidden="true" />
                     </div>
                   </div>
                   <div className="relative z-10">
-                    <h3 className="max-w-sm text-3xl font-medium leading-tight tracking-tight sm:text-4xl">{name}</h3>
-                    <p className="mt-3 text-sm text-[#4f5d50] sm:text-base">{description}</p>
-                    {href && <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em]">Visit website <ArrowUpRight size={16} aria-hidden="true" /></span>}
+                    <h3 className="max-w-sm text-base font-medium leading-tight tracking-tight sm:text-xl lg:text-3xl">{name}</h3>
+                    <p className="movement-card-description mt-0.5 text-xs leading-tight text-[#4f5d50] md:mt-2 md:text-sm">{description}</p>
+                    {href && <span className="movement-card-visit mt-4 hidden items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] lg:inline-flex">Visit website <ArrowUpRight size={14} aria-hidden="true" /></span>}
                   </div>
-                  <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -right-20 h-64 w-64 rounded-full border-[32px] border-white/25 transition-transform duration-700 group-hover:scale-125" />
+                  {href && <ArrowUpRight size={19} aria-hidden="true" className="absolute right-4 top-1/2 -translate-y-1/2 lg:hidden" />}
+                  <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -right-20 hidden h-64 w-64 rounded-full border-[32px] border-white/25 transition-transform duration-700 group-hover:scale-125 lg:block" />
                 </Card>
                 );
               })}

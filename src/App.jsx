@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 
 const videoUrl = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_204221_5339e40b-e73d-4ab0-9c65-79c18c66fd50.mp4';
 const publicEmail = 'office@hrgroup.id';
@@ -16,51 +16,51 @@ const movementBrands = [
     name: 'Daily Dose Pilates',
     href: 'https://dailydosepilates.com/',
     logoDomain: 'dailydosepilates.com',
-    color: 'bg-[#e6e5d9]',
+    description: 'Mindful Pilates for strength, balance, and everyday movement.',
   },
   {
     name: 'Limitless Fitness',
     href: 'https://limitlessfitness.id/',
     logoDomain: 'limitlessfitness.id',
-    color: 'bg-[#dce5d9]',
+    description: 'Strength training and coaching for your next level.',
   },
   {
     name: 'Sunrise Padel',
     href: 'https://sunrisepadel.id/',
     logoDomain: 'sunrisepadel.id',
-    color: 'bg-[#ede1d1]',
+    description: 'Padel courts connecting people through play.',
   },
   {
     name: 'The Cave',
     href: 'https://thecave.id/',
     logoDomain: 'thecave.id',
-    color: 'bg-[#dce1df]',
+    description: 'Boxing, Muay Thai, and conditioning with purpose.',
+    logoClassName: 'drop-shadow-[0_1px_1px_rgba(23,32,24,0.8)]',
   },
   {
     name: 'Little Rollers for Kids',
     logoSrc: '/images/little-rollers.png',
-    color: 'bg-[#efe8dc]',
+    description: 'Playful movement building confident, active kids.',
   },
 ];
 
-function BrandLogo({ name, domain, src }) {
+function BrandLogo({ name, domain, src, className = '' }) {
   const [imageAvailable, setImageAvailable] = useState(true);
 
-  return imageAvailable && (src || domain) ? (
-    <>
-      <div className="flex h-[48%] w-[64%] items-center justify-center">
-      <img
-        src={src || `https://www.google.com/s2/favicons?domain=${domain}&sz=256`}
-        alt={`${name} logo`}
-        loading="eager"
-        className="h-full w-full object-contain"
-        onError={() => setImageAvailable(false)}
-      />
-      </div>
-      <h3 className="mt-1 flex h-[24%] max-w-full items-center justify-center text-[clamp(9px,1.5vw,16px)] font-medium leading-tight tracking-tight sm:mt-2">{name}</h3>
-    </>
-  ) : (
-    <h3 className="px-1 text-center text-[clamp(10px,1.8vw,20px)] font-semibold leading-tight tracking-tight">{name}</h3>
+  return (
+    <div className="flex h-[clamp(64px,12vw,160px)] w-full items-center justify-center">
+      {imageAvailable && (src || domain) ? (
+        <img
+          src={src || `https://www.google.com/s2/favicons?domain=${domain}&sz=256`}
+          alt={`${name} logo`}
+          loading="eager"
+          className={`max-h-full w-[85%] object-contain sm:w-[75%] ${className}`}
+          onError={() => setImageAvailable(false)}
+        />
+      ) : (
+        <h3 className="text-[clamp(10px,1.5vw,18px)] font-semibold leading-tight">{name}</h3>
+      )}
+    </div>
   );
 }
 
@@ -184,22 +184,20 @@ function HomePage() {
               <p className="hidden max-w-xs text-sm leading-relaxed text-[#5f695f] md:block lg:text-base">Five ways to find your flow.</p>
             </div>
 
-            <div>
-              <div className="grid w-full grid-cols-5 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
-              {movementBrands.map(({ name, href, logoDomain, logoSrc, color }) => {
-                const Card = href ? 'a' : 'article';
+            <div className="grid w-full grid-cols-5 items-start gap-2 sm:gap-5 lg:gap-8">
+              {movementBrands.map(({ name, href, logoDomain, logoSrc, logoClassName, description }) => {
+                const Brand = href ? 'a' : 'article';
                 return (
-                <Card
-                  key={name}
-                  {...(href ? { href, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Visit ${name} website (opens in a new tab)` } : {})}
-                  className={`group relative flex aspect-square min-w-0 flex-col items-center justify-center overflow-hidden rounded-xl p-1 text-center sm:rounded-2xl sm:p-3 md:rounded-[26px] ${color} ${href ? 'cursor-pointer transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#172018]' : ''}`}
-                >
-                  <BrandLogo name={name} domain={logoDomain} src={logoSrc} />
-                  {href && <ArrowUpRight size={14} aria-hidden="true" className="absolute right-2 top-2 hidden opacity-60 sm:block" />}
-                </Card>
+                  <Brand
+                    key={name}
+                    {...(href ? { href, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Visit ${name} website (opens in a new tab)` } : {})}
+                    className={`flex min-w-0 flex-col items-center text-center ${href ? 'transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#172018]' : ''}`}
+                  >
+                    <BrandLogo name={name} domain={logoDomain} src={logoSrc} className={logoClassName} />
+                    <p className="mt-4 max-w-[190px] text-[clamp(9px,1.2vw,14px)] leading-relaxed text-[#5f695f] sm:mt-5">{description}</p>
+                  </Brand>
                 );
               })}
-              </div>
             </div>
           </div>
         </section>

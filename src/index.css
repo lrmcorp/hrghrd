@@ -9,6 +9,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html { scroll-behavior: smooth; }
+
 @keyframes fadeSlideUp {
   from {
     opacity: 0;
@@ -21,6 +23,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;

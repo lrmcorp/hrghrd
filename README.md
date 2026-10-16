@@ -1,6 +1,6 @@
 # HR Group wellness landing page
 
-A single-screen React, Tailwind CSS, and Lucide React landing page for HR Group.
+A React, Tailwind CSS, and Lucide React landing page for HR Group, featuring a video hero and five movement brands.
 
 ```sh
 npm install

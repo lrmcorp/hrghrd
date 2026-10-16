@@ -108,7 +108,7 @@ function HomePage() {
           </nav>
         </div>
 
-        <a href="/contact.html" className="hidden rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-transform hover:scale-105 md:inline-flex">
+        <a href="/contact/" className="hidden rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-transform hover:scale-105 md:inline-flex">
           Reach Us
         </a>
 
@@ -138,7 +138,7 @@ function HomePage() {
               </a>
             ))}
           </div>
-          <a href="/contact.html" tabIndex={mobileMenuOpen ? 0 : -1} onClick={() => setMobileMenuOpen(false)} className="mt-10 inline-flex w-fit rounded-full bg-white px-8 py-3.5 text-base font-medium text-black transition-transform hover:scale-105">
+          <a href="/contact/" tabIndex={mobileMenuOpen ? 0 : -1} onClick={() => setMobileMenuOpen(false)} className="mt-10 inline-flex w-fit rounded-full bg-white px-8 py-3.5 text-base font-medium text-black transition-transform hover:scale-105">
             Reach Us
           </a>
         </nav>
@@ -235,7 +235,7 @@ function ContactPage() {
             )}
             <form action="https://formsubmit.co/office@lrmcorporation.com" method="POST" className="space-y-5">
               <input type="hidden" name="_subject" value="New message from HR Group website" />
-              <input type="hidden" name="_next" value="https://hr-group-wellness.almond-flint-4094.chatgpt.site/contact.html?sent=1" />
+              <input type="hidden" name="_next" value="https://hr-group-wellness.almond-flint-4094.chatgpt.site/contact/?sent=1" />
               <input type="text" name="_honey" tabIndex="-1" autoComplete="off" className="absolute -left-[10000px]" aria-hidden="true" />
               <div>
                 <label htmlFor="contact-name" className="mb-2 block text-sm font-medium">Your name</label>
@@ -261,5 +261,5 @@ function ContactPage() {
 }
 
 export default function App() {
-  return typeof window !== 'undefined' && window.location.pathname === '/contact.html' ? <ContactPage /> : <HomePage />;
+  return typeof window !== 'undefined' && /^\/contact(?:\/|\.html)?$/.test(window.location.pathname) ? <ContactPage /> : <HomePage />;
 }

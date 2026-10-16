@@ -110,7 +110,7 @@ function HomePage() {
           </nav>
         </div>
 
-        <a href="/contact/" className="hidden rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-transform hover:scale-105 md:inline-flex">
+        <a href="#contact" className="hidden rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-transform hover:scale-105 md:inline-flex">
           Reach Us
         </a>
 
@@ -140,7 +140,7 @@ function HomePage() {
               </a>
             ))}
           </div>
-          <a href="/contact/" tabIndex={mobileMenuOpen ? 0 : -1} onClick={() => setMobileMenuOpen(false)} className="mt-10 inline-flex w-fit rounded-full bg-white px-8 py-3.5 text-base font-medium text-black transition-transform hover:scale-105">
+          <a href="#contact" tabIndex={mobileMenuOpen ? 0 : -1} onClick={() => setMobileMenuOpen(false)} className="mt-10 inline-flex w-fit rounded-full bg-white px-8 py-3.5 text-base font-medium text-black transition-transform hover:scale-105">
             Reach Us
           </a>
         </nav>
@@ -211,25 +211,21 @@ function HomePage() {
           </div>
         </section>
 
+        <ContactSection />
       </main>
     </div>
   );
 }
 
-function ContactPage() {
+function ContactSection() {
   const messageSent = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('sent') === '1';
 
   return (
-    <div className="min-h-screen bg-[#e9ede4] font-geist text-[#172018]">
-      <header className="flex items-center justify-between bg-[#19231c] px-6 py-5 md:px-12 lg:px-16">
-        <Logo href="/" />
-        <a href="/#movement" className="text-sm text-white/80 transition-colors hover:text-white">Explore Movement</a>
-      </header>
-      <main className="px-6 py-16 sm:py-20 md:px-12 md:py-24 lg:px-16">
+      <section id="contact" aria-labelledby="contact-heading" className="bg-[#e9ede4] px-6 py-16 sm:py-20 md:px-12 md:py-24 lg:px-16">
         <div className="mx-auto grid max-w-[1440px] gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
           <div>
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#617060]">Reach Us</p>
-            <h1 className="max-w-xl text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Let’s move<br />together.</h1>
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#617060]">03 / Reach Us</p>
+            <h2 id="contact-heading" className="max-w-xl text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Let’s move<br />together.</h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-[#59665a]">Have a question or an idea? Send us a note and our team will get back to you.</p>
             <a href={`mailto:${publicEmail}`} className="mt-8 inline-block text-sm font-medium text-[#172018] underline decoration-[#172018]/40 underline-offset-4 hover:decoration-[#172018]">{publicEmail}</a>
           </div>
@@ -240,7 +236,7 @@ function ContactPage() {
             )}
             <form action={`https://formsubmit.co/${formRecipient}`} method="POST" className="space-y-5">
               <input type="hidden" name="_subject" value="New message from HR Group website" />
-              <input type="hidden" name="_next" value="https://hr-group-wellness.almond-flint-4094.chatgpt.site/contact/?sent=1" />
+              <input type="hidden" name="_next" value="https://hr-group-wellness.almond-flint-4094.chatgpt.site/?sent=1#contact" />
               <input type="text" name="_honey" tabIndex="-1" autoComplete="off" className="absolute -left-[10000px]" aria-hidden="true" />
               <div>
                 <label htmlFor="contact-name" className="mb-2 block text-sm font-medium">Your name</label>
@@ -260,11 +256,10 @@ function ContactPage() {
             </form>
           </div>
         </div>
-      </main>
-    </div>
+      </section>
   );
 }
 
 export default function App() {
-  return typeof window !== 'undefined' && /^\/contact(?:\/|\.html)?$/.test(window.location.pathname) ? <ContactPage /> : <HomePage />;
+  return <HomePage />;
 }
